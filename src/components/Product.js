@@ -5,8 +5,8 @@ function Product({ image, title, price }) {
     <div className="card">
       <img className="card-img" src={image} alt={title} />
       <div className="card-text">
-        <h2>{title}</h2>
-        <h3>{price}</h3>
+        <h2 className="card-title">{title}</h2>
+        <h3 className="card-price">Price: €{price}</h3>
       </div>
       <button className="card-btn">View details</button>
     </div>

@@ -10,7 +10,6 @@ function ListItems({ products }) {
           <li>{<Product image={product.image} title={product.title} price={product.price} />}</li>
         );
       })}
-      ;
     </div>
   );
 }
