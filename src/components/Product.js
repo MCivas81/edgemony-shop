@@ -8,7 +8,9 @@ function Product({ image, title, price }) {
         <h2 className="card-title">{title}</h2>
         <h3 className="card-price">Price: €{price}</h3>
       </div>
-      <button className="card-btn">View details</button>
+      <button type="button" className="card-btn">
+        View details
+      </button>
     </div>
   );
 }
