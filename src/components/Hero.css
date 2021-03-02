@@ -40,10 +40,14 @@
     display: block;
     font-size: 30px;
   }
+
   .hero-img {
     width: 95%;
+    height: 400px;
+    object-fit: cover;
     filter: brightness(50%);
-    box-shadow: 5px 5px 10px 2px #808080;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px 1px #808080;
   }
 
   .hero-text {
