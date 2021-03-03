@@ -2,7 +2,7 @@ import "./Product.css";
 import React, { useState } from "react";
 import ModalProduct from "./ModalProduct";
 
-function Product({ image, title, price }) {
+function Product({ image, title, price, description }) {
   const [modalIsShown, setModalIsShown] = useState(false);
 
   return (
@@ -23,6 +23,7 @@ function Product({ image, title, price }) {
         image={image}
         title={title}
         price={price}
+        description={description}
       />
     </div>
   );
