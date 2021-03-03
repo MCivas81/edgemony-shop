@@ -8,7 +8,14 @@ function ListItems({ products }) {
       {products.map((product) => {
         return (
           <li key={product.id}>
-            {<Product image={product.image} title={product.title} price={product.price} />}
+            {
+              <Product
+                image={product.image}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+              />
+            }
           </li>
         );
       })}
