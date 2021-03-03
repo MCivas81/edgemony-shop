@@ -2,8 +2,8 @@ import React from "react";
 
 import "./ModalProduct.css";
 
-function ModalProduct({ image, title, price }) {
-  return (
+function ModalProduct({ isOpen, closeModal, image, title, price }) {
+  return isOpen ? (
     <div className="modal">
       <div className="modal-content">
         <img src={image} alt="product_img" />
@@ -12,13 +12,13 @@ function ModalProduct({ image, title, price }) {
           <h3>Price: €{price}</h3>
         </div>
         <div>
-          <button type="button" className="modal-btn">
+          <button onClick={() => closeModal()} type="button" className="modal-btn">
             X
           </button>
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default ModalProduct;
