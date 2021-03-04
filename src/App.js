@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Error from "./components/Error/Error";
+import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
 import { useState, useEffect } from "react";
@@ -21,6 +22,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
+  const [retry, setRetry] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +36,7 @@ function App() {
         setLoading(false);
         setError(true);
       });
-  }, []);
+  }, [retry]);
 
   return (
     <div className="App">
@@ -45,8 +47,8 @@ function App() {
         cover={data.cover}
         alt="Company_img"
       />
-      {!isLoading ? <ListItems products={products} /> : <h2 className="Loading">Loading...</h2>}
-      {isError && <Error>Si è verificato un errore</Error>}
+      {!isLoading ? <ListItems products={products} /> : <Loading />}
+      {isError && <Error setRetry={setRetry} />}
     </div>
   );
 }

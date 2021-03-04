@@ -11,7 +11,7 @@ function Product({ image, title, price, description }) {
         <img className="card-img" src={image} alt={title} />
         <div className="card-text">
           <h2 className="card-title">{title}</h2>
-          <h3 className="card-price">Price: €{price}</h3>
+          <span className="card-price">Price: €{price}</span>
         </div>
         <button type="button" className="card-btn" onClick={() => setModalIsShown(true)}>
           View details

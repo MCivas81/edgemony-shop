@@ -1,11 +1,11 @@
 .header {
   background-color: #1d3354;
-  height: 60px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: left;
 }
 
 .header-img {
-  width: 150px;
+  width: 200px;
 }
