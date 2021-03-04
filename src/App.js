@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Error from "./components/Error/Error";
+import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
 import { useState, useEffect } from "react";
@@ -45,7 +46,7 @@ function App() {
         cover={data.cover}
         alt="Company_img"
       />
-      {!isLoading ? <ListItems products={products} /> : <h2 className="Loading">Loading...</h2>}
+      {!isLoading ? <ListItems products={products} /> : <Loading />}
       {isError && <Error>Si è verificato un errore</Error>}
     </div>
   );
