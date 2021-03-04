@@ -1,7 +1,17 @@
 .Loading-banner {
-  display: flex;
   text-align: center;
-  justify-content: center;
+}
+
+.Loading-text {
+  display: block;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #1d3354;
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 0 #bcbcbc, 1px 1px 0 #9c9c9c;
 }
 
 .lds-ellipsis {
@@ -12,7 +22,7 @@
 }
 .lds-ellipsis div {
   position: absolute;
-  top: 33px;
+  top: 15px;
   width: 13px;
   height: 13px;
   border-radius: 50%;

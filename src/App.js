@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://fakestoreapi.com/product")
+    fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((products) => {
         setProducts(products);
