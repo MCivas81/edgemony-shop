@@ -2,7 +2,7 @@ import "./Loading.css";
 
 function Loading() {
   return (
-    <div className="loading-banner">
+    <div className="Loading-banner">
       <div className="lds-ellipsis">
         <div></div>
         <div></div>

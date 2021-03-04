@@ -1,8 +1,45 @@
-.Error {
-  color: #ff0000;
-  display: block;
-  padding: 10px 20px;
-  font-size: 24px;
-  border: 1px solid #ff0000;
+.Error-banner {
+  position: absolute;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+  background-color: #da0000;
   text-align: center;
+}
+
+.Error-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Error-txt {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.Error-retryBtn {
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  color: #ffffff;
+  background-color: #da0000;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.Error-closeBtn {
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  padding: 3px;
+  color: #ffffff;
+  background-color: #da0000;
+  outline: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
 }

@@ -22,10 +22,11 @@ function App() {
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
+  const [retry, setRetry] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://fakestoreapi.com/product")
       .then((response) => response.json())
       .then((products) => {
         setProducts(products);
@@ -35,7 +36,7 @@ function App() {
         setLoading(false);
         setError(true);
       });
-  }, []);
+  }, [retry]);
 
   return (
     <div className="App">
@@ -47,7 +48,7 @@ function App() {
         alt="Company_img"
       />
       {!isLoading ? <ListItems products={products} /> : <Loading />}
-      {isError && <Error>Si è verificato un errore</Error>}
+      {isError && <Error setRetry={setRetry} />}
     </div>
   );
 }
