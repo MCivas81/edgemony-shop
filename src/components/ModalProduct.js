@@ -9,8 +9,9 @@ function ModalProduct({ isOpen, closeModal, image, title, price, description }) 
         <img src={image} alt="product_img" />
         <div className="modal-text">
           <h2>{title}</h2>
-          <span>{description}</span>
-          <h3>Price: €{price}</h3>
+          <p>{description}</p>
+          <hr />
+          <span className="modal-price">Price: €{price}</span>
         </div>
         <div>
           <button onClick={() => closeModal()} type="button" className="modal-btn">
