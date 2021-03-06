@@ -42,12 +42,11 @@
 
 .modal-btn {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 10px;
+  top: 10px;
   border: none;
   background-color: #ffffff;
   font-size: 25px;
-  border: 1px solid black;
   border-radius: 3px;
   cursor: pointer;
   outline: none;

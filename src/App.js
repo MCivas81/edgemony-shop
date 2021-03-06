@@ -48,7 +48,7 @@ function App() {
         alt="Company_img"
       />
       {!isLoading ? <ListItems products={products} /> : <Loading />}
-      {isError && <Error setRetry={setRetry} />}
+      {isError && <Error retry={retry} setRetry={setRetry} />}
     </div>
   );
 }
