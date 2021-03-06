@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+#search {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 50px;
+  transition: width 0.4s ease-in-out;
+}
+
+#search:focus {
+  width: 50%;
+}
