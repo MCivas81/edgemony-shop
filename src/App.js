@@ -21,6 +21,7 @@ function App() {
   const [isError, setError] = useState(false);
   const [retry, setRetry] = useState(false);
   const [input, setInput] = useState("");
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -38,7 +39,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header logo={data.logo} name="Edgemony_logo" />
+      <Header logo={data.logo} name="Edgemony_logo" cart={cart} />
       <Hero
         title={data.title}
         description={data.description}
@@ -51,7 +52,7 @@ function App() {
         type="text"
         placeholder="Search..."
       />
-      {!isLoading ? <ListItems products={products} input={input} /> : <Loading />}
+      {!isLoading ? <ListItems products={products} input={input} setCart={setCart} /> : <Loading />}
       {isError && <Error retry={retry} setRetry={setRetry} />}
     </div>
   );

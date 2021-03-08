@@ -3,7 +3,16 @@
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: space-between;
+}
+
+.header-container {
+  margin-right: 30px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .header-img {

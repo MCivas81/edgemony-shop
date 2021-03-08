@@ -2,16 +2,16 @@ import "./Product.css";
 import React, { useState } from "react";
 import ModalProduct from "./ModalProduct";
 
-function Product({ image, title, price, description }) {
+function Product({ product, setCart }) {
   const [modalIsShown, setModalIsShown] = useState(false);
 
   return (
     <div>
       <div className="card">
-        <img className="card-img" src={image} alt={title} />
+        <img className="card-img" src={product.image} alt={product.title} />
         <div className="card-text">
-          <h2 className="card-title">{title}</h2>
-          <span className="card-price">Price: €{price}</span>
+          <h2 className="card-title">{product.title}</h2>
+          <span className="card-price">Price: €{product.price}</span>
         </div>
         <button type="button" className="card-btn" onClick={() => setModalIsShown(true)}>
           View details
@@ -20,10 +20,8 @@ function Product({ image, title, price, description }) {
       <ModalProduct
         isOpen={modalIsShown}
         closeModal={() => setModalIsShown(false)}
-        image={image}
-        title={title}
-        price={price}
-        description={description}
+        product={product}
+        setCart={setCart}
       />
     </div>
   );
