@@ -12,7 +12,7 @@ function Header({ logo, cart }) {
     <header className="header">
       <img className="header-img" src={logo} alt="Edgemony_logo" />
       <div className="header-container">
-        <span>Total Price: {totalPrices()}</span>
+        <span>Total Price: €{totalPrices()}</span>
         <span>Products in Cart: {cart.length}</span>
       </div>
     </header>
