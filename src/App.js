@@ -3,6 +3,7 @@ import Error from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
+import ModalProduct from "./components/ModalProduct";
 import { useState, useEffect } from "react";
 
 import "./App.css";
@@ -16,12 +17,40 @@ const data = {
 };
 
 function App() {
+  const [input, setInput] = useState("");
+
+  // Cart logic
+  const [cart, setCart] = useState([]);
+
+  // Modal logic
+  const [modalIsShown, setModalIsShown] = useState(false);
+  const [productInModal, setProductInModal] = useState(null);
+
+  function openProductModal(product) {
+    setProductInModal(product);
+    setModalIsShown(true);
+  }
+
+  function closeProductModal() {
+    setModalIsShown(false);
+    setProductInModal(null);
+  }
+
+  useEffect(() => {
+    if (modalIsShown) {
+      document.body.style.height = `100vh`;
+      document.body.style.overflow = `hidden`;
+    } else {
+      document.body.style.height = ``;
+      document.body.style.overflow = ``;
+    }
+  }, [modalIsShown]);
+
+  // API data logic
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [retry, setRetry] = useState(false);
-  const [input, setInput] = useState("");
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -52,8 +81,19 @@ function App() {
         type="text"
         placeholder="Search..."
       />
-      {!isLoading ? <ListItems products={products} input={input} setCart={setCart} /> : <Loading />}
+      {!isLoading ? (
+        <ListItems products={products} input={input} openProductModal={openProductModal} />
+      ) : (
+        <Loading />
+      )}
       {isError && <Error retry={retry} setRetry={setRetry} />}
+      <ModalProduct
+        isOpen={modalIsShown}
+        closeModal={closeProductModal}
+        product={productInModal}
+        setCart={setCart}
+        cart={cart}
+      />
     </div>
   );
 }

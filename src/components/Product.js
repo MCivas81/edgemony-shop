@@ -1,10 +1,7 @@
 import "./Product.css";
-import React, { useState } from "react";
-import ModalProduct from "./ModalProduct";
+import React from "react";
 
-function Product({ product, setCart }) {
-  const [modalIsShown, setModalIsShown] = useState(false);
-
+function Product({ product, openProductModal }) {
   return (
     <div>
       <div className="card">
@@ -13,16 +10,10 @@ function Product({ product, setCart }) {
           <h2 className="card-title">{product.title}</h2>
           <span className="card-price">Price: €{product.price}</span>
         </div>
-        <button type="button" className="card-btn" onClick={() => setModalIsShown(true)}>
+        <button type="button" className="card-btn" onClick={openProductModal}>
           View details
         </button>
       </div>
-      <ModalProduct
-        isOpen={modalIsShown}
-        closeModal={() => setModalIsShown(false)}
-        product={product}
-        setCart={setCart}
-      />
     </div>
   );
 }
