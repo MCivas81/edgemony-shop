@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "./ModalProduct.css";
 
-function ModalProduct({ isOpen, closeModal, product, setCart }) {
-  const [isInCart, setIsInCart] = useState(false);
-  const [buttonText, setButtonText] = useState("Add to cart");
+function ModalProduct({ isOpen, closeModal, product, setCart, cart }) {
+  const isAlreadyInCart = () => cart.find((p) => p.id === product.id);
 
-  function addToCart() {
-    setCart((prevState) => [...prevState, { ...product }]);
-  }
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.height = `100vh`;
-      document.body.style.overflow = `hidden`;
+  const toggleCart = () => {
+    if (isAlreadyInCart()) {
+      const newCart = cart.filter((p) => p.id !== product.id);
+      setCart(newCart);
     } else {
-      document.body.style.height = ``;
-      document.body.style.overflow = ``;
+      setCart([...cart, { quantity: 1, ...product }]);
     }
-  }, [isOpen]);
+  };
 
   return isOpen ? (
-    <div className="modal">
+    <div className="modal" onClick={closeModal}>
       <div className="modal-content">
         <img src={product.image} alt="product_img" />
         <div className="modal-text">
@@ -29,23 +23,15 @@ function ModalProduct({ isOpen, closeModal, product, setCart }) {
           <p>{product.description}</p>
           <hr />
           <div className="modal-bottomContent">
-            <button
-              disabled={isInCart}
-              onClick={() => {
-                addToCart();
-                setIsInCart(true);
-                setButtonText("In Cart");
-              }}
-              className="modal-cartBtn"
-              type="button">
-              {buttonText}
+            <button onClick={toggleCart} className="modal-cartBtn" type="button">
+              {isAlreadyInCart() ? "Remove to Cart -" : "Add to Cart +"}
             </button>
             <span className="modal-price">Price: €{product.price}</span>
           </div>
         </div>
         <div>
-          <button onClick={() => closeModal()} type="button" className="modal-btn">
-            X
+          <button onClick={closeModal} type="button" className="modal-btn">
+            x
           </button>
         </div>
       </div>
