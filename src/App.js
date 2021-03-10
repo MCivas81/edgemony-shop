@@ -17,11 +17,6 @@ const data = {
 };
 
 function App() {
-  const [input, setInput] = useState("");
-
-  // Cart logic
-  const [cart, setCart] = useState([]);
-
   // Modal logic
   const [modalIsShown, setModalIsShown] = useState(false);
   const [productInModal, setProductInModal] = useState(null);
@@ -66,23 +61,29 @@ function App() {
       });
   }, [retry]);
 
+  // Cart logic
+  const [cart, setCart] = useState([]);
+
+  let price = 0;
+
+  function totalPrice() {
+    cart.map((product) => (price = price + product.price));
+    return price.toFixed(2);
+  }
+
+  const cartSize = cart.length;
+
   return (
     <div className="App">
-      <Header logo={data.logo} name="Edgemony_logo" cart={cart} />
+      <Header logo={data.logo} name="Edgemony_logo" cartSize={cartSize} totalPrice={totalPrice()} />
       <Hero
         title={data.title}
         description={data.description}
         cover={data.cover}
         alt="Company_img"
       />
-      <input
-        onChange={(e) => setInput(e.target.value)}
-        id="searchBar"
-        type="text"
-        placeholder="Search..."
-      />
       {!isLoading ? (
-        <ListItems products={products} input={input} openProductModal={openProductModal} />
+        <ListItems products={products} openProductModal={openProductModal} />
       ) : (
         <Loading />
       )}

@@ -1,0 +1,28 @@
+.HeaderCart {
+  color: #ffffff;
+  margin-left: auto;
+  padding-right: 25px;
+}
+
+.HeaderCart .icon {
+  font-size: 1.6em;
+  position: relative;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.HeaderCart .qty {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  border-radius: 50%;
+  background-color: #ba0000;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+}

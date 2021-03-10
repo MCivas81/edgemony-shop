@@ -14,29 +14,32 @@ function ModalProduct({ isOpen, closeModal, product, setCart, cart }) {
     }
   };
 
-  return isOpen ? (
-    <div className="modal" onClick={closeModal}>
-      <div className="modal-content">
-        <img src={product.image} alt="product_img" />
-        <div className="modal-text">
-          <h2>{product.title}</h2>
-          <p>{product.description}</p>
-          <hr />
-          <div className="modal-bottomContent">
-            <button onClick={toggleCart} className="modal-cartBtn" type="button">
+  return (
+    <div className={`ModalProduct ${isOpen ? `isOpen` : ""}`}>
+      <div className="overlay" onClick={closeModal} />
+      <div className="body">
+        <button onClick={closeModal} title="close product modal" className="close">
+          ×
+        </button>
+        {!!product ? (
+          <div className="content">
+            <img src={product.image} alt={product.title} />
+            <h2>{product.title}</h2>
+            <p>{product.description}</p>
+            <button type="button" className="addToCart" onClick={toggleCart}>
               {isAlreadyInCart() ? "Remove to Cart -" : "Add to Cart +"}
             </button>
-            <span className="modal-price">Price: €{product.price}</span>
+            <br />
+            <br />
+            <hr />
+            <div className="price">
+              <small>Price:</small> {product.price}€
+            </div>
           </div>
-        </div>
-        <div>
-          <button onClick={closeModal} type="button" className="modal-btn">
-            x
-          </button>
-        </div>
+        ) : null}
       </div>
     </div>
-  ) : null;
+  );
 }
 
 export default ModalProduct;
