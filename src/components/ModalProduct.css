@@ -1,68 +1,98 @@
-.modal {
+.ModalProduct {
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.ModalProduct.isOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ModalProduct .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(222, 222, 222, 0.85);
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
 }
 
-.modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 30px;
-  border: 1px solid #888888;
-  border-radius: 5px;
+.ModalProduct.isOpen .overlay {
+  opacity: 1;
+}
+
+.ModalProduct .body {
   max-width: 520px;
-  text-align: center;
+  max-height: 90vh;
   box-sizing: border-box;
+  overflow: auto;
+  width: calc(100% - 20px - 20px);
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 36px rgba(0, 0, 0, 0.25);
+  position: relative;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-in-out, transform 0.333s ease-out;
+  text-align: justify;
 }
 
-.modal-content img {
-  width: 250px;
-  height: 250px;
-  object-fit: scale-down;
+.ModalProduct.isOpen .body {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.modal-text {
-  text-align: left;
-  font-size: 15px;
+.ModalProduct img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  object-position: center;
 }
 
-.modal-bottomContent {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.modal-cartBtn {
-  background-color: #000000;
-  color: #ffffff;
+.ModalProduct .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
   border: none;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.ModalProduct .price {
+  font-size: 24px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.ModalProduct .price small {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.addToCart {
+  background-color: #45ecd3;
+  color: #000000;
+  border: none;
+  border: 1px solid #000000;
   border-radius: 3px;
   font-size: 15px;
-  font-weight: 600;
   padding: 5px;
   outline: none;
   cursor: pointer;
-}
-
-.modal-price {
-  font-size: 20px;
-  letter-spacing: 1px;
-}
-
-.modal-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  border: none;
-  background-color: #ffffff;
-  font-size: 25px;
-  border-radius: 3px;
-  cursor: pointer;
-  outline: none;
 }
