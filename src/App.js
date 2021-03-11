@@ -4,6 +4,7 @@ import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
 import ModalProduct from "./components/ModalProduct";
+import ModalCart from "./components/ModalCart";
 import { useState, useEffect } from "react";
 
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
   // Modal logic
   const [modalIsShown, setModalIsShown] = useState(false);
   const [productInModal, setProductInModal] = useState(null);
+  const [isCartOpen, setCartOpen] = useState(false);
 
   function openProductModal(product) {
     setProductInModal(product);
@@ -32,14 +34,14 @@ function App() {
   }
 
   useEffect(() => {
-    if (modalIsShown) {
+    if (modalIsShown || isCartOpen) {
       document.body.style.height = `100vh`;
       document.body.style.overflow = `hidden`;
     } else {
       document.body.style.height = ``;
       document.body.style.overflow = ``;
     }
-  }, [modalIsShown]);
+  }, [modalIsShown, isCartOpen]);
 
   // API data logic
   const [products, setProducts] = useState([]);
@@ -63,19 +65,35 @@ function App() {
 
   // Cart logic
   const [cart, setCart] = useState([]);
-
-  let price = 0;
-
-  function totalPrice() {
-    cart.map((product) => (price = price + product.price));
-    return price.toFixed(2);
+  const cartProducts = cart.map((cartItem) => {
+    const { price, image, title, id } = products.find((p) => p.id === cartItem.id);
+    return { price, image, title, id, quantity: cartItem.quantity };
+  });
+  const cartTotal = cartProducts
+    .reduce((total, product) => total + product.price * product.quantity, 0)
+    .toFixed(2);
+  function isInCart(product) {
+    return product != null && cart.find((p) => p.id === product.id) != null;
   }
-
-  const cartSize = cart.length;
+  function addToCart(productId) {
+    setCart([...cart, { id: productId, quantity: 1 }]);
+  }
+  function removeFromCart(productId) {
+    setCart(cart.filter((product) => product.id !== productId));
+  }
+  function setProductQuantity(productId, quantity) {
+    setCart(cart.map((product) => (product.id === productId ? { ...product, quantity } : product)));
+  }
 
   return (
     <div className="App">
-      <Header logo={data.logo} name="Edgemony_logo" cartSize={cartSize} totalPrice={totalPrice()} />
+      <Header
+        logo={data.logo}
+        name="Edgemony_logo"
+        cartSize={cart.length}
+        cartTotal={cartTotal}
+        onCartClick={() => setCartOpen(true)}
+      />
       <Hero
         title={data.title}
         description={data.description}
@@ -88,12 +106,21 @@ function App() {
         <Loading />
       )}
       {isError && <Error retry={retry} setRetry={setRetry} />}
+      <ModalCart
+        products={cartProducts}
+        isOpen={isCartOpen}
+        close={() => setCartOpen(false)}
+        totalPrice={cartTotal}
+        removeFromCart={removeFromCart}
+        setProductQuantity={setProductQuantity}
+      />
       <ModalProduct
         isOpen={modalIsShown}
-        closeModal={closeProductModal}
         product={productInModal}
-        setCart={setCart}
-        cart={cart}
+        closeModal={closeProductModal}
+        inCart={isInCart(productInModal)}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
       />
     </div>
   );
