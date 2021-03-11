@@ -8,7 +8,7 @@ function Product({ product, openProductModal }) {
         <img className="card-img" src={product.image} alt={product.title} />
         <div className="card-text">
           <h2 className="card-title">{product.title}</h2>
-          <span className="card-price">Price: €{product.price}</span>
+          <span className="card-price">Price: €{product.price.toFixed(2)}</span>
         </div>
         <button type="button" className="card-btn" onClick={openProductModal}>
           View details

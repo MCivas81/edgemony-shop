@@ -2,15 +2,12 @@ import React from "react";
 
 import "./ModalProduct.css";
 
-function ModalProduct({ isOpen, closeModal, product, setCart, cart }) {
-  const isAlreadyInCart = () => cart.find((p) => p.id === product.id);
-
+function ModalProduct({ isOpen, closeModal, product, inCart, addToCart, removeFromCart }) {
   const toggleCart = () => {
-    if (isAlreadyInCart()) {
-      const newCart = cart.filter((p) => p.id !== product.id);
-      setCart(newCart);
+    if (inCart) {
+      removeFromCart(product.id);
     } else {
-      setCart([...cart, { quantity: 1, ...product }]);
+      addToCart(product.id);
     }
   };
 
@@ -27,7 +24,7 @@ function ModalProduct({ isOpen, closeModal, product, setCart, cart }) {
             <h2>{product.title}</h2>
             <p>{product.description}</p>
             <button type="button" className="addToCart" onClick={toggleCart}>
-              {isAlreadyInCart() ? "Remove to Cart -" : "Add to Cart +"}
+              {inCart ? "Remove to Cart -" : "Add to Cart +"}
             </button>
             <br />
             <br />
