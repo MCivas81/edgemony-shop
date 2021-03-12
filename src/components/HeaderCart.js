@@ -1,7 +1,6 @@
 import "./HeaderCart.css";
 
 function HeaderCart({ cartSize, cartTotal, onCartClick }) {
-  console.log(cartSize);
   return (
     <div className="HeaderCart">
       {!!cartSize && <span className="price">€ {cartTotal}</span>}
