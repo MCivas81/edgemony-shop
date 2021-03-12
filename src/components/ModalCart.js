@@ -7,7 +7,7 @@ function ModalCart({ products, isOpen, close, totalPrice, removeFromCart, setPro
     <div className={`ModalCart ${isOpen ? `is-open` : ""}`}>
       <div className="ModalCart__overlay" onClick={close}></div>
       <div className="ModalCart__body">
-        <header>
+        <header className="ModalCart__header">
           <button className="ModalCart__close" onClick={close}>
             X
           </button>
