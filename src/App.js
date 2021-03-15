@@ -3,8 +3,10 @@ import Error from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
-import ModalProduct from "./components/ModalProduct";
-import ModalCart from "./components/ModalCart";
+import Modal from "./components/Modal";
+import ProductDetails from "./components/ProductDetails";
+import Cart from "./components/Cart";
+import ModalSidebar from "./components/ModalSidebar";
 import { useState, useEffect } from "react";
 
 import "./App.css";
@@ -12,7 +14,8 @@ import "./App.css";
 const data = {
   title: "Edgemony Shop",
   description: "A fake e-commerce with a lot of potential",
-  logo: "https://edgemony.com/wp-content/uploads/2020/03/cropped-Logo-edgemony_TeBIANCO-04.png",
+  logo:
+    "https://edgemony.com/wp-content/uploads/2020/03/cropped-Logo-edgemony_TeBIANCO-04.png",
   cover:
     "https://images.pexels.com/photos/4123897/pexels-photo-4123897.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
 };
@@ -66,7 +69,9 @@ function App() {
   // Cart logic
   const [cart, setCart] = useState([]);
   const cartProducts = cart.map((cartItem) => {
-    const { price, image, title, id } = products.find((p) => p.id === cartItem.id);
+    const { price, image, title, id } = products.find(
+      (p) => p.id === cartItem.id
+    );
     return { price, image, title, id, quantity: cartItem.quantity };
   });
   const cartTotal = cartProducts
@@ -82,7 +87,11 @@ function App() {
     setCart(cart.filter((product) => product.id !== productId));
   }
   function setProductQuantity(productId, quantity) {
-    setCart(cart.map((product) => (product.id === productId ? { ...product, quantity } : product)));
+    setCart(
+      cart.map((product) =>
+        product.id === productId ? { ...product, quantity } : product
+      )
+    );
   }
 
   return (
@@ -106,22 +115,27 @@ function App() {
         <Loading />
       )}
       {isError && <Error retry={retry} setRetry={setRetry} />}
-      <ModalCart
-        products={cartProducts}
+      <ModalSidebar
         isOpen={isCartOpen}
         close={() => setCartOpen(false)}
-        totalPrice={cartTotal}
-        removeFromCart={removeFromCart}
-        setProductQuantity={setProductQuantity}
-      />
-      <ModalProduct
-        isOpen={modalIsShown}
-        product={productInModal}
-        closeModal={closeProductModal}
-        inCart={isInCart(productInModal)}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-      />
+        titleSidebar="Cart">
+        <Cart
+          products={cartProducts}
+          totalPrice={cartTotal}
+          removeFromCart={removeFromCart}
+          setProductQuantity={setProductQuantity}
+        />
+      </ModalSidebar>
+      <Modal isOpen={modalIsShown} closeModal={closeProductModal}>
+        {productInModal && (
+          <ProductDetails
+            product={productInModal}
+            inCart={isInCart(productInModal)}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+          />
+        )}
+      </Modal>
     </div>
   );
 }

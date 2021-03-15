@@ -1,0 +1,31 @@
+.Cart {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.Cart__content {
+  flex-grow: 1;
+  overflow: auto;
+  margin-bottom: 125px;
+}
+
+.Cart__textnotice {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.Cart__footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0; 
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  background-color: #1d3354;
+  color: #ffffff;
+}
