@@ -3,7 +3,8 @@ import Error from "./components/Error/Error";
 import Loading from "./components/Loading/Loading";
 import Hero from "./components/Hero";
 import ListItems from "./components/ListItems";
-import ModalProduct from "./components/ModalProduct";
+import Modal from "./components/Modal";
+import ProductDetails from "./components/ProductDetails";
 import ModalCart from "./components/ModalCart";
 import { useState, useEffect } from "react";
 
@@ -114,14 +115,16 @@ function App() {
         removeFromCart={removeFromCart}
         setProductQuantity={setProductQuantity}
       />
-      <ModalProduct
-        isOpen={modalIsShown}
-        product={productInModal}
-        closeModal={closeProductModal}
-        inCart={isInCart(productInModal)}
-        addToCart={addToCart}
-        removeFromCart={removeFromCart}
-      />
+      <Modal isOpen={modalIsShown} closeModal={closeProductModal}>
+        {productInModal && (
+          <ProductDetails
+            product={productInModal}
+            inCart={isInCart(productInModal)}
+            addToCart={addToCart}
+            removeFromCart={removeFromCart}
+          />
+        )}
+      </Modal>
     </div>
   );
 }
