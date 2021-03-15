@@ -14,14 +14,17 @@ function ProductDetails({ product, inCart, addToCart, removeFromCart }) {
       <img src={product.image} alt={product.title} />
       <h2>{product.title}</h2>
       <p>{product.description}</p>
-      <button type="button" className="ProductDetails__addToCart" onClick={toggleCart}>
+      <button
+        type="button"
+        className="ProductDetails__addToCart"
+        onClick={toggleCart}>
         {inCart ? "Remove to Cart -" : "Add to Cart +"}
       </button>
       <br />
       <br />
       <hr />
       <div className="ProductDetails__price">
-        <small>Price:</small> {product.price}€
+        <small>Price:</small> €{product.price}
       </div>
     </div>
   );

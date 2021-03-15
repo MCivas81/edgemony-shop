@@ -1,4 +1,4 @@
-.ModalCart {
+.ModalSidebar {
   z-index: 1000;
   position: fixed;
   top: 0;
@@ -7,12 +7,12 @@
   width: 100%;
   pointer-events: none;
 }
-.ModalCart.is-open {
+.ModalSidebar.is-open {
   opacity: 1;
   pointer-events: auto;
 }
 
-.ModalCart__overlay {
+.ModalSidebar__overlay {
   background-color: rgba(222, 222, 222, 0.85);
   position: absolute;
   width: 100%;
@@ -21,11 +21,11 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
-.ModalCart.is-open .ModalCart__overlay {
+.ModalSidebar.is-open .ModalSidebar__overlay {
   opacity: 1;
 }
 
-.ModalCart__body {
+.ModalSidebar__body {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -40,37 +40,17 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out, transform 0.333s ease-out;
 }
-.ModalCart.is-open .ModalCart__body {
+.ModalSidebar.is-open .ModalSidebar__body {
   opacity: 1;
   transform: translateX(0);
 }
 
-.ModalCart__header {
+.ModalSidebar__header {
   background-color: #1d3354;
   color: #ffffff;
 }
 
-.ModalCart__content {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.ModalCart__content__empty {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.ModalCart footer {
-  padding: 20px;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-align: center;
-  background-color: #1d3354;
-  color: #ffffff;
-}
-
-.ModalCart__close {
+.ModalSidebar__close {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -84,12 +64,8 @@
   cursor: pointer;
 }
 
-.ModalCart__content__empty {
-  font-size: 20px;
-}
-
 @media (min-width: 700px) {
-  .ModalCart__body {
+  .ModalSidebar__body {
     width: 500px;
   }
 }
