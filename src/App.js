@@ -1,15 +1,15 @@
+import Product from "./pages/Product";
+import Page404 from "./pages/Page404";
+import Home from "./pages/Home";
 import Header from "./components/Header";
-import Error from "./components/Error/Error";
-import Loading from "./components/Loading/Loading";
-import Hero from "./components/Hero";
-import ListItems from "./components/ListItems";
-import Modal from "./components/Modal";
-import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import ModalSidebar from "./components/ModalSidebar";
 import { useState, useEffect } from "react";
 
 import "./App.css";
+
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const data = {
   title: "Edgemony Shop",
@@ -22,66 +22,30 @@ const data = {
 
 function App() {
   // Modal logic
-  const [modalIsShown, setModalIsShown] = useState(false);
-  const [productInModal, setProductInModal] = useState(null);
   const [isCartOpen, setCartOpen] = useState(false);
 
-  function openProductModal(product) {
-    setProductInModal(product);
-    setModalIsShown(true);
-  }
-
-  function closeProductModal() {
-    setModalIsShown(false);
-    setProductInModal(null);
-  }
-
   useEffect(() => {
-    if (modalIsShown || isCartOpen) {
+    if (isCartOpen) {
       document.body.style.height = `100vh`;
       document.body.style.overflow = `hidden`;
     } else {
       document.body.style.height = ``;
       document.body.style.overflow = ``;
     }
-  }, [modalIsShown, isCartOpen]);
-
-  // API data logic
-  const [products, setProducts] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(false);
-  const [retry, setRetry] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://fakestoreapi.com/products")
-      .then((response) => response.json())
-      .then((products) => {
-        setProducts(products);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
-      });
-  }, [retry]);
+  }, [isCartOpen]);
 
   // Cart logic
   const [cart, setCart] = useState([]);
-  const cartProducts = cart.map((cartItem) => {
-    const { price, image, title, id } = products.find(
-      (p) => p.id === cartItem.id
-    );
-    return { price, image, title, id, quantity: cartItem.quantity };
-  });
-  const cartTotal = cartProducts
-    .reduce((total, product) => total + product.price * product.quantity, 0)
-    .toFixed(2);
+
+  const cartTotal = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
   function isInCart(product) {
     return product != null && cart.find((p) => p.id === product.id) != null;
   }
-  function addToCart(productId) {
-    setCart([...cart, { id: productId, quantity: 1 }]);
+  function addToCart(product) {
+    setCart([...cart, { ...product, quantity: 1 }]);
   }
   function removeFromCart(productId) {
     setCart(cart.filter((product) => product.id !== productId));
@@ -95,48 +59,45 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Header
-        logo={data.logo}
-        name="Edgemony_logo"
-        cartSize={cart.length}
-        cartTotal={cartTotal}
-        onCartClick={() => setCartOpen(true)}
-      />
-      <Hero
-        title={data.title}
-        description={data.description}
-        cover={data.cover}
-        alt="Company_img"
-      />
-      {!isLoading ? (
-        <ListItems products={products} openProductModal={openProductModal} />
-      ) : (
-        <Loading />
-      )}
-      {isError && <Error retry={retry} setRetry={setRetry} />}
-      <ModalSidebar
-        isOpen={isCartOpen}
-        close={() => setCartOpen(false)}
-        titleSidebar="Cart">
-        <Cart
-          products={cartProducts}
-          totalPrice={cartTotal}
-          removeFromCart={removeFromCart}
-          setProductQuantity={setProductQuantity}
+    <Router>
+      <div className="App">
+        <Header
+          logo={data.logo}
+          name="Edgemony_logo"
+          cartSize={cart.length}
+          cartTotal={cartTotal}
+          onCartClick={() => setCartOpen(true)}
         />
-      </ModalSidebar>
-      <Modal isOpen={modalIsShown} closeModal={closeProductModal}>
-        {productInModal && (
-          <ProductDetails
-            product={productInModal}
-            inCart={isInCart(productInModal)}
-            addToCart={addToCart}
+
+        <ModalSidebar
+          isOpen={isCartOpen}
+          close={() => setCartOpen(false)}
+          titleSidebar="Cart">
+          <Cart
+            products={cart}
+            totalPrice={cartTotal}
             removeFromCart={removeFromCart}
+            setProductQuantity={setProductQuantity}
           />
-        )}
-      </Modal>
-    </div>
+        </ModalSidebar>
+
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/product/:productId">
+            <Product
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              isInCart={isInCart}
+            />
+          </Route>
+          <Route path="*">
+            <Page404 />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

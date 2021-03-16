@@ -1,7 +1,9 @@
-import "./Product.css";
+import { Link } from "react-router-dom";
+
+import "./ProductItem.css";
 import React from "react";
 
-function Product({ product, openProductModal }) {
+function ProductItem({ product }) {
   return (
     <div>
       <div className="card">
@@ -10,12 +12,14 @@ function Product({ product, openProductModal }) {
           <h2 className="card-title">{product.title}</h2>
           <span className="card-price">Price: €{product.price.toFixed(2)}</span>
         </div>
-        <button type="button" className="card-btn" onClick={openProductModal}>
-          View details
-        </button>
+        <Link to={`/product/${product.id}`}>
+          <button type="button" className="card-btn">
+            View details
+          </button>
+        </Link>
       </div>
     </div>
   );
 }
 
-export default Product;
+export default ProductItem;
