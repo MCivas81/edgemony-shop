@@ -17,7 +17,7 @@ function CartProduct({ product, removeFromCart, setProductQuantity }) {
           <span>{quantity}</span>
           <button onClick={increment}>+</button>
         </div>
-        <p className="CartProduct__price">€{price.toFixed(2)}</p>
+        <p className="CartProduct__price">€{price}</p>
         <button className="CartProduct__remove" onClick={remove}>
           Remove
         </button>

@@ -1,0 +1,44 @@
+.Product__content {
+  margin-top: 80px;
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+.Product__content img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.Product__content h2 {
+  padding: 0 20px;
+}
+
+.Product__content p {
+  padding: 0 20px;
+}
+
+.Product__addToCart {
+  background-color: #45ecd3;
+  color: #000000;
+  border: none;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  font-size: 15px;
+  padding: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.Product__price {
+  font-size: 24px;
+  padding: 0 20px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.Product__price small {
+  font-size: 18px;
+  font-weight: normal;
+}

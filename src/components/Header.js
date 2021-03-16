@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import HeaderCart from "./HeaderCart";
 
 import "./Header.css";
@@ -5,8 +7,14 @@ import "./Header.css";
 function Header({ logo, cartSize, cartTotal, onCartClick }) {
   return (
     <header className="header">
-      <img className="header-img" src={logo} alt="Edgemony_logo" />
-      <HeaderCart cartSize={cartSize} cartTotal={cartTotal} onCartClick={onCartClick} />
+      <Link to="/">
+        <img className="header-img" src={logo} alt="Edgemony_logo" />
+      </Link>
+      <HeaderCart
+        cartSize={cartSize}
+        cartTotal={cartTotal}
+        onCartClick={onCartClick}
+      />
     </header>
   );
 }

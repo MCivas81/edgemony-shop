@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Product from "./Product";
+import ProductItem from "./ProductItem";
 
 import "./ListItems.css";
 
@@ -17,11 +17,18 @@ function ListItems({ products, openProductModal }) {
       />
       <div className="products-container">
         {products
-          .filter((product) => product.title.toUpperCase().includes(input.toUpperCase()))
+          .filter((product) =>
+            product.title.toUpperCase().includes(input.toUpperCase())
+          )
           .map((product) => {
             return (
               <li key={product.id}>
-                {<Product product={product} openProductModal={() => openProductModal(product)} />}
+                {
+                  <ProductItem
+                    product={product}
+                    openProductModal={() => openProductModal(product)}
+                  />
+                }
               </li>
             );
           })}
