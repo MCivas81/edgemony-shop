@@ -14,20 +14,26 @@ const data = {
     "https://images.pexels.com/photos/4123897/pexels-photo-4123897.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
 };
 
+let cache;
+
 function Home() {
   // API data logic
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(cache ? cache.products : []);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState(false);
   const [retry, setRetry] = useState(false);
 
   useEffect(() => {
+    if (cache !== undefined) {
+      return;
+    }
     setLoading(true);
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
       .then((products) => {
         setProducts(products);
         setLoading(false);
+        cache = { products };
       })
       .catch(() => {
         setLoading(false);

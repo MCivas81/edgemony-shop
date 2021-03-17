@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.HeaderCart .icon:visited {
+  color: #ffffff;
+}
+
 .HeaderCart .qty {
   position: absolute;
   top: -15px;
