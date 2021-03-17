@@ -4,14 +4,14 @@ import ProductItem from "./ProductItem";
 
 import "./ListItems.css";
 
-function ListItems({ products, openProductModal }) {
+function ListItems({ products }) {
   const [input, setInput] = useState("");
 
   return (
     <div className="container">
       <input
         onChange={(e) => setInput(e.target.value)}
-        id="searchBar"
+        className="searchBar"
         type="text"
         placeholder="Search..."
       />
@@ -22,14 +22,7 @@ function ListItems({ products, openProductModal }) {
           )
           .map((product) => {
             return (
-              <li key={product.id}>
-                {
-                  <ProductItem
-                    product={product}
-                    openProductModal={() => openProductModal(product)}
-                  />
-                }
-              </li>
+              <li key={product.id}>{<ProductItem product={product} />}</li>
             );
           })}
       </div>

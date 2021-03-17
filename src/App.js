@@ -1,9 +1,8 @@
 import Product from "./pages/Product";
 import Page404 from "./pages/Page404";
 import Home from "./pages/Home";
+import Cart from "./pages/Cart";
 import Header from "./components/Header";
-import Cart from "./components/Cart";
-import ModalSidebar from "./components/ModalSidebar";
 import { useState, useEffect } from "react";
 
 import "./App.css";
@@ -69,18 +68,6 @@ function App() {
           onCartClick={() => setCartOpen(true)}
         />
 
-        <ModalSidebar
-          isOpen={isCartOpen}
-          close={() => setCartOpen(false)}
-          titleSidebar="Cart">
-          <Cart
-            products={cart}
-            totalPrice={cartTotal}
-            removeFromCart={removeFromCart}
-            setProductQuantity={setProductQuantity}
-          />
-        </ModalSidebar>
-
         <Switch>
           <Route exact path="/">
             <Home />
@@ -90,6 +77,14 @@ function App() {
               addToCart={addToCart}
               removeFromCart={removeFromCart}
               isInCart={isInCart}
+            />
+          </Route>
+          <Route path="/cart">
+            <Cart
+              products={cart}
+              totalPrice={cartTotal}
+              removeFromCart={removeFromCart}
+              setProductQuantity={setProductQuantity}
             />
           </Route>
           <Route path="*">

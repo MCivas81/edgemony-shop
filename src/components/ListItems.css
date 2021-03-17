@@ -6,7 +6,7 @@
   margin: 30px;
 }
 
-#searchBar {
+.searchBar {
   width: 130px;
   box-sizing: border-box;
   border: 2px solid #cccccc;
@@ -18,12 +18,12 @@
   transition: width 0.4s ease-in-out;
 }
 
-#searchBar:focus {
+.searchBar:focus {
   width: 50%;
 }
 
 @media only screen and (min-width: 576px) {
-  #searchBar:focus {
+  .searchBar:focus {
     width: 30%;
   }
 }
