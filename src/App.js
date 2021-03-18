@@ -103,35 +103,23 @@ function App() {
             ) : isError ? (
               <Error retry={retry} setRetry={setRetry} />
             ) : (
-              <Home products={products} />
+              <Home products={products} isLoading={isLoading} />
             )}
           </Route>
           <Route path="/product/:productId">
-            {isLoading ? (
-              <Loading />
-            ) : isError ? (
-              <Error retry={retry} setRetry={setRetry} />
-            ) : (
-              <Product
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
-                isInCart={isInCart}
-              />
-            )}
+            <Product
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              isInCart={isInCart}
+            />
           </Route>
           <Route path="/cart">
-            {isLoading ? (
-              <Loading />
-            ) : isError ? (
-              <Error retry={retry} setRetry={setRetry} />
-            ) : (
-              <Cart
-                products={cart}
-                totalPrice={cartTotal}
-                removeFromCart={removeFromCart}
-                setProductQuantity={setProductQuantity}
-              />
-            )}
+            <Cart
+              products={cart}
+              totalPrice={cartTotal}
+              removeFromCart={removeFromCart}
+              setProductQuantity={setProductQuantity}
+            />
           </Route>
           <Route path="*">
             <Page404 />
